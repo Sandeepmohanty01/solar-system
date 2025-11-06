@@ -18,7 +18,7 @@ jobs:
         strategy:
           matrix:
               nodejs_version: [18,20]
-              operating_system: [ubuntu-latest, ubuntu]
+              operating_system: [ubuntu-latest]
               exclude:
                   - nodejs_version: 18
                   - operating_system: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
           run: ls -R
 
         - name: Archive Test Result
-          if: failure() && (steps.nodejs-unit-testing-step.outcome == 'failure' || steps.nodejs-unit-testing-step.outcome == 'success')
+          if: always()
           uses: actions/upload-artifact@v4
           with:
             name: Mocha-Test-Result
